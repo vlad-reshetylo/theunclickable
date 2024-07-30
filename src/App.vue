@@ -102,9 +102,9 @@ const levels = [
     new DisplayNoneButton(),
     new Layers(),
 
+    new CrazyAnimatedButton(),
     new FakeButton(),
     new TinyButtonHiddenByBefore(),
-    new CrazyAnimatedButton(),
 
     new ConsoleButton(),
     new TooManyButtons(),
