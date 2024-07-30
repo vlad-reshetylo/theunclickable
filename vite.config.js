@@ -21,7 +21,7 @@ export default defineConfig({
       mangle: true,
       sourceMap: false,
     },
-    outDir: '../docs',
+    outDir: './docs',
     emptyOutDir: true,	
   }
 })

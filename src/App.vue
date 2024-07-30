@@ -14,16 +14,26 @@
 
             <transition name="modal">
                 <modal v-if="modal.isShown" @okay="handleOkay" :class="modal.mode">
-                    <template v-if="isStarted">
+                    <template v-if="state === 'started'">
                         {{ modal.text }}
                     </template>
 
-                    <div class="note" v-else>
+                    <div class="note" v-if="state === 'loading'">
                         Use your web development skills, logic, and maybe even a bit of agility to complete all the levels!
                         <div>
                             Please note, the game was tested only on Google Chrome 126. Older or other browsers are expected to work but are not guaranteed.
                         </div>
                     </div>
+                    
+                    <template v-if="state === 'finished'">
+                        Great Job! 🎉
+                        <br>
+                        <br>
+                        Thank you for playing! You did fantastic!
+                        <br>
+                        <br>
+                        I'd love to hear your thoughts. You can rate the game and share your experience, suggestions, ideas via the <a href="https://github.com/vlad-reshetylo/theunclickable/discussions/1">Link</a>
+                    </template>
                 </modal>
             </transition>
             
@@ -58,7 +68,7 @@ import {Layers} from "@/Levels/Layers.js";
 import {ConsoleButton} from "@/Levels/ConsoleButton.js";
 import {DoNotForce} from "@/Levels/DoNotForce.js";
 
-const isStarted = ref(false);
+const state = ref('loading');
 const modal = reactive({
     text: 'Use your web development skills, logic, and maybe even a bit of agility to complete all the levels!',
     mode: 'info',
@@ -106,7 +116,7 @@ const currentLevel = ref(0);
 const task = ref('');
 
 let okayHandler = () => {
-    isStarted.value = true;
+    state.value = 'started';
     nextLevel();
 }
 
@@ -116,9 +126,17 @@ const nextLevel = () => {
     
     const playground = document.querySelector('#playground');
     playground.innerHTML = '';
+    
+    if (!level) {
+        state.value = 'finished';
+        okayHandler = () => window.location.href = 'https://github.com/vlad-reshetylo/theunclickable/discussions/1';
+        return showModal();
+    }
+    
     playground.setAttribute('level', level.getSymbol ? level.getSymbol() : '');
     
     currentLevel.value = levelsNumber - levels.length;
+    
     task.value = level.getTask();
 
     level.render(
@@ -151,7 +169,7 @@ const handleOkay = () => {
 
 onMounted(() => {
     document.addEventListener('keydown', function(event) {
-        if (!modalIsVisible.value) {
+        if (!modal.isShown) {
             return;
         }
         
@@ -373,5 +391,9 @@ showModal();
                 }
             }
         }
+    }
+    
+    a {
+        color: #0a003c;
     }
 </style>
