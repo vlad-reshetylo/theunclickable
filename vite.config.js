@@ -20,6 +20,8 @@ export default defineConfig({
     terserOptions: {
       mangle: true,
       sourceMap: false,
-    }
+    },
+    outDir: '../docs',
+    emptyOutDir: true,	
   }
 })
