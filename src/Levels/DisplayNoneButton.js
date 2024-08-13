@@ -19,6 +19,7 @@ class DisplayNoneButton {
                 return panic('No, not this way 😉');
             }
 
+            button.remove();
             pass('Yep, you found it!');
         }
 

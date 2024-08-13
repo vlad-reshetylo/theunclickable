@@ -18,6 +18,7 @@ class ShouldBeGreenButton {
                 return panic("No, it's not a green button");
             }
 
+            button.remove();
             pass("Good job!");
         }
 

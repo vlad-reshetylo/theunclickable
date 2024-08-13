@@ -22,6 +22,7 @@ class HiddenCursor {
                 return panic('No, not this way 😉');
             }
 
+            button.remove();
             pass('That was too easy!');
         }
 

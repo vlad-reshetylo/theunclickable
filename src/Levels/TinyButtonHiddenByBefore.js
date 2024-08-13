@@ -19,6 +19,7 @@ class TinyButtonHiddenByBefore {
                 return panic('No, not this way 😉');
             }
 
+            button.remove();
             pass('Yes, it was not so hard 🙃');
         }
 
