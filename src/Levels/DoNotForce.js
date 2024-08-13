@@ -17,6 +17,7 @@ class DoNotForce {
                 return panic('Hmmm, it seems this button really doesn\'t want to be clicked');
             }
 
+            button.remove();
             pass('You know how to convince!');
         }
 

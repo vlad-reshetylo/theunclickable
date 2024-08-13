@@ -49,6 +49,7 @@ class FakeButton {
                 return;
             }
 
+            button.remove();
             pass('Exactly 👏');
         }
 

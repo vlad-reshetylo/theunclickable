@@ -19,6 +19,7 @@ class DisabledButton {
                 return panic('No, not this way 😉');
             }
 
+            button.remove();
             pass('Good job!');
         }
 
